@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Enter Birthday Name</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #aaa;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            background-color: #4facfe;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #00f2fe;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>Enter your Name</h2>
+        <input type="text" id="nameInput" placeholder="Enter name..." required />
+        <br />
+        <h2>Enter your age</h2>
+        <input type="number" id="ageInput" placeholder="Enter age..." required />
+        <br />
+        <h2>Enter your hobbie or occupation</h2>
+        <input type="text" id="hobbie" placeholder="Enter hobbie..." />
+        <br />
+        <button onclick="goToBirthday()">Surprise</button>
+        <p>Warning: This page contains sound/music</p>
+    </div>
+
+    <script>
+        function goToBirthday() {
+            const name = document.getElementById("nameInput").value.trim();
+            const hobbie = document.getElementById("hobbie").value.trim();
+            const age = document.getElementById("ageInput").value.trim();
+            if (name) {
+                window.location.href = `birthday.html?name=${encodeURIComponent(name)}&hobbie=${encodeURIComponent(hobbie)}&age=${encodeURIComponent(age)}`;
+            } else {
+                alert("Please enter a name!");
+            }
+        }
+    </script>
+</body>
+
+</html>

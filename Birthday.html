@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .countdown {
+            font-size: 5rem;
+            color: #ff4081;
+            text-align: center;
+            margin-top: 20vh;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .container {
+            text-align: center;
+            padding: 100px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem;
+            color: #ff4081;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #444;
+            margin: 20px 0;
+            animation: floatText 2s ease-in-out infinite alternate;
+        }
+
+        .card {
+            margin: 50px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            background: #fff3e0;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 64, 129, 0.3);
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .card p {
+            font-size: 1.2rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 999;
+        }
+
+        .fireworks span {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: red;
+            animation: explode 1s ease-out forwards;
+        }
+
+        .cake {
+            margin: 50px auto;
+            height: 50vh;
+            width: fit-content;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .balloons {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 50px;
+            height: 70px;
+            border-radius: 50%;
+            animation: float 6s infinite;
+        }
+
+        .red {
+            background-color: rgba(255, 0, 0, 0.7);
+            left: 20%;
+        }
+
+        .blue {
+            background-color: rgba(0, 0, 255, 0.7);
+            left: 60%;
+        }
+
+        .balloon.red {
+            animation-delay: 0s;
+        }
+
+        .balloon.blue {
+            animation-delay: 2s;
+        }
+
+        .balloon:nth-child(3) {
+            left: 40%;
+            animation-delay: 1s;
+        }
+
+        .balloon:nth-child(4) {
+            left: 80%;
+            animation-delay: 3s;
+        }
+
+        .balloon:nth-child(5) {
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        .balloon:nth-child(6) {
+            left: 70%;
+            animation-delay: 5s;
+        }
+
+        .balloon:nth-child(7) {
+            left: 30%;
+            animation-delay: 6s;
+        }
+
+        .balloon:nth-child(8) {
+            left: 50%;
+            animation-delay: 7s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100vh);
+            }
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatText {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .music-notes {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 30px;
+            animation: floatMusic 2s infinite alternate;
+            color: #ff4081;
+            cursor: pointer;
+        }
+
+        @keyframes floatMusic {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-15px) rotate(10deg);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 10px;
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="countdown"></div>
+    <div class="container">
+        <h1 id="birthday-title">🎉 Happy Birthday! 🎂</h1>
+        <div class="subtitle">Wishing you all the love, laughter & success 💖</div>
+
+        <div class="card">
+            <div id="birthday-message">Loading your wish...</div>
+        </div>
+
+        <div class="balloons">
+            <div class="balloon red"></div>
+            <div class="balloon blue"></div>
+            <div class="balloon red"></div>
+            <div class="balloon blue"></div>
+            <div class="balloon red"></div>
+            <div class="balloon blue"></div>
+            <div class="balloon red"></div>
+            <div class="balloon blue"></div>
+        </div>
+
+        <div class="cake">
+            <div id="cake-container"></div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+            <script>
+                var animation = bodymovin.loadAnimation({
+                    container: document.getElementById('cake-container'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: 'cake_animation.json',
+                    rendererSettings: {
+                        preserveAspectRatio: 'xMidYMid meet',
+                        hideOnTransparent: true,
+                        className: 'cake-animation',
+                        id: '',
+                    }
+                });
+
+                // Set width and height via CSS for the container
+                var cakeContainer = document.getElementById('cake-container');
+                cakeContainer.style.width = '400px';
+                cakeContainer.style.height = '300px';
+            </script>
+        </div>
+        <audio autoplay src="happy-birthday.mp3">
+        </audio>
+
+        <div class="music-notes">🎵</div>
+        <div class="fireworks" id="fireworks"></div>
+    </div>
+    <script>
+        const audio = document.querySelector('audio');
+        const musicNotes = document.querySelector('.music-notes');
+        let isMuted = false;
+
+        musicNotes.addEventListener('click', function () {
+            if (isMuted) {
+                audio.muted = false;
+                musicNotes.textContent = '🎵';
+            } else {
+                audio.muted = true;
+                musicNotes.textContent = '🔇';
+            }
+            isMuted = !isMuted;
+        });
+
+        audio.currentTime = 9;
+    </script>
+
+    <footer>Made with ❤️ for <span id="footer-name"></span> | May this year be full of wins 🏆</footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name') || "Friend";
+        const hobbie = params.get('hobbie') || "general";
+        const age = params.get('age') || "unknown";
+
+        async function fetchBirthdayWish() {
+            const Count = document.getElementsByClassName("countdown")[0];
+            document.querySelector(".container").style.display = "none";
+            document.querySelector("footer").style.display = "none";
+
+            const countdown = ["3", "2", "1", "🎉 Surprise!"];
+
+            for (let i = 0; i < countdown.length; i++) {
+                Count.innerHTML = countdown[i];
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+            }
+
+            Count.style.display = "none";
+            document.getElementsByClassName("container")[0].style.display = "block";
+            document.getElementsByTagName("footer")[0].style.display = "block";
+            document.getElementById("birthday-title").innerText = `🎉 Happy Birthday ${name}! 🎂`;
+            document.getElementById("footer-name").innerText = name;
+
+            generateBirthdayWish();
+        }
+
+        fetchBirthdayWish();
+
+        generateBirthdayWish(name, hobbie);
+        async function generateBirthdayWish() {
+            const apiKey = "AIzaSyAxuab6K_703XmpSqd4L_4tJggKALKB24c";
+            const model = "gemini-1.5-flash";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+            const prompt = `Write a short birthday wish paragraph for ${name} of age ${age} with the taste of his hobbie ${hobbie}. Make it no more than 50 words`;
+
+            const data = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }],
+                generationConfig: {
+                    maxOutputTokens: 100,
+                    temperature: 0.7,
+                    topP: 0.8,
+                    topK: 40
+                },
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                const wish = result.candidates[0].content.parts[0].text;
+                document.getElementById("birthday-message").innerHTML = `${wish}<br> Let’s celebrate YOU! 🎈`;
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+            }
+        }
+
+        const fireworksContainer = document.getElementById('fireworks');
+
+        function launchFirework() {
+            const count = 30;
+
+            for (let i = 0; i < count * 5; i++) {
+                const spark = document.createElement('span'); spark.style.left = Math.random() * 100
+                    + 'vw'; spark.style.top = Math.random() * 100 + 'vh'; const dx = (Math.random() - 0.5) * 400 + 'px'; const
+                        dy = (Math.random() - 0.5) * 400 + 'px'; spark.style.setProperty('--x', dx); spark.style.setProperty('--y', dy);
+                spark.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`; fireworksContainer.appendChild(spark);
+                setTimeout(() => {
+                    spark.remove();
+                }, 1000);
+            }
+        }
+
+        // Launch fireworks every 2 seconds
+        setInterval(launchFirework, 2000);
+    </script>
+</body>
+
+</html>
