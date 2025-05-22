@@ -350,7 +350,7 @@
 
         generateBirthdayWish(name, hobbie);
         async function generateBirthdayWish() {
-            const apiKey = "AIzaSyAxuab6K_703XmpSqd4L_4tJggKALKB24c";
+            const apiKey = "AIzaSyCjol1nUd_4siVLyiVpt0k3Ohea-1L9q-g";
             const model = "gemini-1.5-flash";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
@@ -378,7 +378,9 @@
                 });
 
                 const result = await response.json();
+                console.log(result);
                 const wish = result.candidates[0].content.parts[0].text;
+                console.log(wish);
                 document.getElementById("birthday-message").innerHTML = `${wish}<br> Let’s celebrate YOU! 🎈`;
             } catch (error) {
                 console.error("Error calling Gemini API:", error);
